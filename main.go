@@ -21,7 +21,7 @@ func main() {
 				fmt.Println("Unable to fetch server statistic")
 				break
 			}
-			time.Sleep(1 * time.Second)
+			time.Sleep(100 * time.Millisecond)
 			continue
 		}
 
@@ -33,7 +33,7 @@ func main() {
 				fmt.Println("Unable to fetch server statistic")
 				break
 			}
-			time.Sleep(1 * time.Second)
+			time.Sleep(100 * time.Millisecond)
 			continue
 		}
 
@@ -44,7 +44,7 @@ func main() {
 				fmt.Println("Unable to fetch server statistic")
 				break
 			}
-			time.Sleep(1 * time.Second)
+			time.Sleep(100 * time.Millisecond)
 			continue
 		}
 
@@ -64,7 +64,7 @@ func main() {
 				fmt.Println("Unable to fetch server statistic")
 				break
 			}
-			time.Sleep(1 * time.Second)
+			time.Sleep(100 * time.Millisecond)
 			continue
 		}
 
@@ -100,6 +100,6 @@ func main() {
 			}
 		}
 
-		time.Sleep(3 * time.Second)
+		time.Sleep(100 * time.Millisecond)
 	}
 }

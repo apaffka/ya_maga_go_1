@@ -13,7 +13,7 @@ func main() {
 	errorCount := 0
 
 	for {
-		resp, err := http.Get("http://127.0.0.1:8080/_stats")
+		resp, err := http.Get("http://srv.msk01.gigacorp.local/_stats")
 		if err != nil || resp.StatusCode != 200 {
 			errorCount++
 			if errorCount >= 3 {

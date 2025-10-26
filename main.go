@@ -18,7 +18,7 @@ func main() {
 			errorCount++
 			if errorCount >= 3 {
 				fmt.Println("Unable to fetch server statistic")
-				return
+				break
 			}
 			time.Sleep(1 * time.Second)
 			continue
@@ -30,7 +30,7 @@ func main() {
 			errorCount++
 			if errorCount >= 3 {
 				fmt.Println("Unable to fetch server statistic")
-				return
+				break
 			}
 			time.Sleep(1 * time.Second)
 			continue
@@ -41,13 +41,12 @@ func main() {
 			errorCount++
 			if errorCount >= 3 {
 				fmt.Println("Unable to fetch server statistic")
-				return
+				break
 			}
 			time.Sleep(1 * time.Second)
 			continue
 		}
 
-		// успешный ответ — сбрасываем счётчик ошибок
 		errorCount = 0
 
 		values := make([]int64, 7)
@@ -55,13 +54,17 @@ func main() {
 			v, err := strconv.ParseInt(fields[i], 10, 64)
 			if err != nil {
 				errorCount++
-				if errorCount >= 3 {
-					fmt.Println("Unable to fetch server statistic")
-					return
-				}
-				continue
+				break
 			}
 			values[i] = v
+		}
+		if errorCount > 0 {
+			if errorCount >= 3 {
+				fmt.Println("Unable to fetch server statistic")
+				break
+			}
+			time.Sleep(1 * time.Second)
+			continue
 		}
 
 		load := values[0]
@@ -91,8 +94,7 @@ func main() {
 		if totalNet > 0 {
 			netUsage := usedNet * 100 / totalNet
 			if netUsage > 90 {
-				// ✅ Исправлено: делим на 1_000_000, а не на 1024*1024
-				freeMbit := (totalNet - usedNet) * 8 / 1_000_000
+				freeMbit := (totalNet - usedNet) * 8 / (1024 * 1024)
 				fmt.Printf("Network bandwidth usage high: %d Mbit/s available\n", freeMbit)
 			}
 		}

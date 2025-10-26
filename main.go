@@ -47,7 +47,7 @@ func main() {
 			continue
 		}
 
-		// Сброс ошибок после успешного запроса
+		// успешный ответ — сбрасываем счётчик ошибок
 		errorCount = 0
 
 		values := make([]int64, 7)
@@ -91,11 +91,12 @@ func main() {
 		if totalNet > 0 {
 			netUsage := usedNet * 100 / totalNet
 			if netUsage > 90 {
+				// ✅ Исправлено: делим на 1_000_000, а не на 1024*1024
 				freeMbit := (totalNet - usedNet) * 8 / 1_000_000
 				fmt.Printf("Network bandwidth usage high: %d Mbit/s available\n", freeMbit)
 			}
 		}
 
-		time.Sleep(3 * time.Second) // период опроса
+		time.Sleep(3 * time.Second)
 	}
 }

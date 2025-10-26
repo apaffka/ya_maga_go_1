@@ -1,4 +1,3 @@
-// чисто для проверки ещё раз
 package main
 
 import (

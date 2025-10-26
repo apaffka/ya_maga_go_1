@@ -1,3 +1,4 @@
+// Для проверки
 package main
 
 import (
